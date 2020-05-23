@@ -1,22 +1,28 @@
-\documentclass{article}
+\documentclass{report}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{float}
 
-\title{Sibilla distribuito perchè sì}
-\author{Stelluti Francesco Pio, Zamponi Marco}
-\date{Giugno 2020}
+\usepackage[italian]{babel}
+
+\title{Sviluppo di un ambiente per la simulazione distribuita}
+\author{Stelluti Francesco Pio\\
+\texttt{francescopi.stelluti@studenti.unicam.it}
+\and Zamponi Marco\\
+\texttt{marco.zamponi@studenti.unicam.it}}
 
 \begin{document}
-\sloppy
 \maketitle
+\sloppy
 
-\pagenumbering{gobble}
-\tableofcontents
-\input{avvioprogetto}
-\input{strutturaclassi}
-\input{descrizioneinfrastruttura}
+\newpage
+\input{tableofcontents}
+
+\pagestyle{headings}
+\input{introduzione/introduzione.tex}
+\input{simulazioneDistribuita/simulazione_distribuita.tex}
+
 \appendix
 
 \end{document}

@@ -1,0 +1,75 @@
+
+
+\section{Struttura delle classi}
+
+\subsection{quasylab.sibilla.core.network}
+Il package di riferimento relativo alla libreria sviluppata. Le classi contenute al suo interno hanno la natura di wrapper di dati e hanno un impiego condiviso da parte degli ulteriori pacchetti, ognuno presente con responsabilità e finalità definiti:
+
+\subsection{quasylab.sibilla.core.network.client} Contiene tutte le classi utili a inizializzare un nuovo client e a gestire la comunicazione con un server master.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{images/quasylab.sibilla.core.network.client.png}
+    \captionsetup{justification=centering}
+    \caption{Diagramma delle classi del package quasylab.sibilla.core.network.client}
+  \end{figure}
+
+\subsection{quasylab.sibilla.core.network.master} Contiene tutte le classi utili a inizializzare un nuovo server master e a gestire la comunicazione con tutti i client che sottomettono ad esso simulazione e con tutti i server slave che sono presenti all’interno della rete in cui tale master è avviato.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{images/quasylab.sibilla.core.network.master.png}
+    \captionsetup{justification=centering}
+    \caption{Diagramma delle classi del package quasylab.sibilla.core.network.master}
+  \end{figure}
+
+\subsection{quasylab.sibilla.core.network.slave} Contiene tutte le classi utili a inizializzare un nuovo server slave e a gestire la comunicazione con tutti i server master che inviano messaggi di discovery e sottomettono simulazioni.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{images/quasylab.sibilla.core.network.slave.png}
+    \captionsetup{justification=centering}
+    \caption{Diagramma delle classi del package quasylab.sibilla.core.network.slave}
+  \end{figure}
+
+\subsection{quasylab.sibilla.core.network.communication} Contiene le classi che si occupano di gestire la comunicazione tramite i vari nodi dell’infrastruttura basandosi sui protocolli di trasporto TCP e UDP. 
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{images/quasylab.sibilla.core.network.communication.png}
+    \captionsetup{justification=centering}
+    \caption{Diagramma delle classi del package quasylab.sibilla.core.network.communication}
+  \end{figure}
+
+\subsection{quasylab.sibilla.core.network.compression} Contiene le classi di utilità che sono impiegate per la compressione e la decompressione dei messaggi e dei dati all’interno del protocollo di comunicazione. Il funzionamento delle classi all’interno del pacchetto si basa sulla librerie java.util.zip.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{images/quasylab.sibilla.core.network.compression.png}
+    \captionsetup{justification=centering}
+    \caption{Diagramma delle classi del package quasylab.sibilla.core.network.compression}
+  \end{figure}
+
+\subsection{quasylab.sibilla.core.network.serialization} Contiene le classi di utilità che sono impiegate per la serializzazione e deserializzazione dei messaggi e dei dati all’interno del protocollo di comunicazione e per il caricamento a tempo d’esecuzione delle classi contenenti i modelli delle simulazioni da elaborare e gestire. Il funzionamento delle classi relative alla serializzazione si basa sulla libreria org.apache.commons.lang3.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{images/quasylab.sibilla.core.network.serialization.png}
+    \captionsetup{justification=centering}
+    \caption{Diagramma delle classi del package quasylab.sibilla.core.network.serialization}
+  \end{figure}
+
+\subsection{quasylab.sibilla.core.network.utils} Contiene varie classi di utilità che sono impiegate all’interno delle classi della libreria. Tra le funzionalità di tali classi rientrano il configurare e gestire i parametri per le comunicazioni in rete basate su SSL, l’ottenere informazioni utili relative alle interfacce di rete del dispositivo e il configurare e gestire i parametri di avvio all’interno delle classi che decidono di implementare ed utilizzare le classi della libreria.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{images/quasylab.sibilla.core.network.utils.png}
+    \captionsetup{justification=centering}
+    \caption{Diagramma delle classi del package quasylab.sibilla.core.network.utils}
+  \end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
