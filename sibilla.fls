@@ -24,6 +24,8 @@ INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\cap
 INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption.sty
 INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption3.sty
 INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption3.sty
+INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty
+INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty
 INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\l3backend\l3backend-pdfmode.def
 INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\tex\latex\l3backend\l3backend-pdfmode.def
 INPUT e:\Programmi\GitHub\sibilla_relazione\sibilla.aux
@@ -43,14 +45,17 @@ INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\c
 INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmsy10.tfm
 INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmsy8.tfm
 INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmsy6.tfm
+INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmr12.tfm
+INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmbx12.tfm
+INPUT e:\Programmi\GitHub\sibilla_relazione\sibilla.toc
+INPUT e:\Programmi\GitHub\sibilla_relazione\sibilla.toc
+INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmbx10.tfm
+OUTPUT e:\Programmi\GitHub\sibilla_relazione\sibilla.toc
 INPUT e:\Programmi\GitHub\sibilla_relazione\avvioprogetto.tex
 INPUT e:\Programmi\GitHub\sibilla_relazione\avvioprogetto.tex
 OUTPUT e:\Programmi\GitHub\sibilla_relazione\sibilla.pdf
 INPUT C:\Users\Francesco\AppData\Local\MiKTeX\2.9\pdftex\config\pdftex.map
-INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmr12.tfm
 INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmbx12.tfm
-INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmbx12.tfm
-INPUT C:\Users\Francesco\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmbx10.tfm
 INPUT e:\Programmi\GitHub\sibilla_relazione\strutturaclassi.tex
 INPUT e:\Programmi\GitHub\sibilla_relazione\strutturaclassi.tex
 INPUT e:\Programmi\GitHub\sibilla_relazione\images\quasylab.sibilla.core.network.client.png
