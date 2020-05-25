@@ -1,2 +1,23 @@
 
 \section{Descrizione dell'infrastruttura}
+L'architettura alla base delle comunicazioni tra i vari nodi della libreria è di natura \textbf{master/slave}.
+Più specificatamente, le simulazioni da eseguire sono sottomesse da parte di un \textbf{client} che si connette ad un \textbf{server master} disponibile pubblicamente in rete, da cui vengono provengono anche i risultati delle simulazioni. 
+All'interno della rete locale al master sono quindi presenti i \textbf{server slave} che rappresentano le unità di elaborazione delle simulazioni. Questi server non sono disponibili pubblicamente in rete e interagiscono con il master per poter ricevere nuove simulazioni da eseguire e per poter restituire i risultati di tali simulazioni.
+
+\subsection{Client}
+La logica di funzionamento di un client è contenuta interamente nella classe \texttt{ClientSimulationEnvironment}, le cui istanze devono essere incluse in tutte le classi di avvio di un client.
+Nella definizione della classe di avvio di un client server è necessario includere l'istanziazione di un oggetto della classe \texttt{ModelDefinition}, rappresentante il modello della simulazione che verrà sottomesso per essere elaborato, e parametri relativi alla simulazione quali il numero delle repliche e la deadline [?].
+
+Alla sua creazione, l'istanza di \texttt{ClientSimulationEnvironment} cercherà di contattare tramite la rete un server master utilizzando i parametri definiti all'avvio, quali porta, indirizzo IP e tipo di comunicazione basata su TCP. 
+Durante questa fase vengono trasmessi al server master i byte contenuti nel file compilato .class relativo alla classe che implementa \texttt{ModelDefinition}, istanziata all'avvio del client.
+Il caricamento di queste informazioni nel server master risulta fondamentale per poter gestire correttamente i dati e i parametri relativi alla simulazione che sono trasmessi dal client successivamente alla prima fase.
+
+L'invio di questi dati coincide con la sottomissione effettiva della simulazione al server master. 
+Tutte le comunicazioni successive a questa fase riguardano la ricezione dei risultati da parte del server master e la chiusura della comunicazione sia lato client che lato server master.
+
+\subsection{Server Master}
+
+Sottosezione del master
+
+\subsection{Server Slave}
+
