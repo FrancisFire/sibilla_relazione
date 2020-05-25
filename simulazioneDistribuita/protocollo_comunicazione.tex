@@ -1,7 +1,8 @@
 
 \section{Protocollo di comunicazione}
 
-I tre componenti dell'infrastruttura comunicano tra di loro tramite l'invio di pacchetti sulla rete, utilizzando un protocollo di comunicazione personalizzato. I messaggi sono di due possibili tipi: comandi o dati. I comandi sono dei messaggi che danno indicazioni agli altri componenti riguardo i dati che verranno inviati e riguardo alle particolari azioni da eseguire, mentre i dati sono le informazioni che vengono utilizzate per eseguire le azioni richieste dai comandi. In generale entrambi i tipi di messaggi sono composti da degli oggetti Java serializzati ed inviati sulla rete.
+I tre componenti dell'infrastruttura comunicano tra di loro tramite l'invio di pacchetti sulla rete, utilizzando un protocollo di comunicazione personalizzato. 
+I messaggi sono di due possibili tipi: \textbf{comandi} o \textbf{dati}. I comandi sono dei messaggi che danno indicazioni agli altri componenti riguardo i dati che verranno inviati e riguardo alle particolari azioni da eseguire, mentre i dati sono le informazioni che vengono utilizzate per eseguire le azioni richieste dai comandi. In generale entrambi i tipi di messaggi sono composti da degli oggetti Java serializzati ed inviati sulla rete.
 
 \subsection{Comandi scambiati}
 
@@ -43,4 +44,35 @@ I tre componenti dell'infrastruttura comunicano tra di loro tramite l'invio di p
 
 \subsection{Serializzazione e compressione}
 
-\subsection{Network Manager}
+\subsection{Trasporto delle informazioni}
+Il trasporto dei messaggi da un nodo all'altro dell'infrastruttura è reso possibile tramite le classi che estendono le interfacce
+\texttt{TCPNetworkManager} e \texttt{UDPNetworkManager}, entrambi presenti nel package \texttt{quasylab.sibilla.core.network.communication} e rappresentanti canali di comunicazione basati sui protocolli
+del livello di trasporto \textbf{TCP} e \textbf{UDP}.
+Gli unici metodi implementati all'interno delle interfacce sono \textbf{factory methods} che restituiscono istanze di classi implementazioni a seconda del valore dei parametri passati come argomento.
+Nello specifico, uno dei metodi e richiede come argomento un'istanza di \texttt{NetworkInfo}, contenente
+i valori di porta e indirizzo logico del nodo che si vuole contattare assieme al valore di \texttt{NetworkManagerType} specifico del canale di comunicazione che si vuole impiegare, mentre l'altro metodo presente
+richiede, rispettivamente in \texttt{TCPNetworkManager} e \texttt{UDPNetworkManager}, un valore di \texttt{TCPNetworkManagerType} assieme ad un'istanza di \texttt{Socket} su cui basare la comunicazione ed un
+valore di \texttt{UDPNetworkManagerType} assieme ad un'istanza di \texttt{DatagramSocket}.
+
+\subsubsection{\texttt{TCPNetworkManager} e l'impiego di TLS}
+I metodi di interfaccia sono basilari e si limitano all'invio e ricezione di informazioni sotto forma di \texttt{byte[]}, al recupero dell'istanza di \texttt{Socket} su cui è basata la comunicazione tramite \textbf{TCP},
+alla chiusura della connessione e all'ottenimento di un'istanza di \texttt{NetworkInfo} contenente porta e indirizzo logico relativi all'altro nodo a cui si è connessi e il valore di \texttt{TCPNetworkManagerType} associato alla particolare implementazione dell'interfaccia.
+
+\texttt{TCPDefaultNetworkManager} e \texttt{TCPSecureNetworkManager} sono le classi presenti nella libreria volte a implementare \texttt{TCPNetworkManager} e rappresentate tramite i valori
+\texttt{DEFAULT} e \texttt{SECURE} all'interno della classe enumerazione \texttt{TCPNetworkManagerType}.
+
+Entrambe le classi basano il loro funzionamento su istanze di \texttt{InputStream} e \texttt{OutputStream} ottenute a partire dall'istanza di \texttt{Socket} generata a partire dalla porta e indirizzo logico del nodo dall'altra parte della comunicazione.
+
+La classe \texttt{TCPSecureNetworkManager}, oltre ad offrire lo stesso sistema di comunicazione basato su TCP di \texttt{TCPDefaultNetworkManager}, sfrutta anche il protocollo
+\textbf{TLS 1.2} per fornire maggiore sicurezza alla comunicazione di rete. 
+TLS 1.2 è la penultima versione del protocollo di sicurezza TLS, successore di \textbf{SSL} e indirizzato a garantire il \textbf{criptaggio} delle informazioni trasmesse,
+l'\textbf{autenticazione} dei due nodi tra cui tale comunicazione avviene e l'\textbf{integrità} dei dati trasmessi.
+L'avvio di una comunicazione TLS si basa sull'\textbf{handshake} tra i due nodi per poter stabilire la suite di algoritmi da impiegare e permettere ai due nodi di procedere con l'autenticazione.
+Nello specifico caso dell'implementazione adottata per lo sviluppo della libreria in esame si è deciso di optare per un'autenticazione a due vie, nella quale ognuno dei due nodi coinvolto nella comunicazione
+procede con l'autenticazione dell'altro nodo tramite il suo certificato verificato.
+
+Per poter ricreare totalmente una comunicazione sicura tramite TLS, per ognuno dei tre tipi di nodi alla base dell'architettura sono stati generati un \textbf{keystore} contenente una chiave pubblica ad identificazione del singolo nodo ed un \textbf{truststore} contenente le chiavi pubbliche degli altri nodi coinvolti nelle comunicazioni su rete.
+La gestione di tali store di chiavi è delegata alla classe di utilità \texttt{SSLUtils}, con la quale è necessario interagire per poter impiegare \texttt{TCPSecureNetworkManager} nel caso la si scelga come classe per le comunicazioni tra i nodi.
+Negli esempi di avvio delle classi della libreria allegati a quest'ultima sono presenti anche i file .jks relativi ai keystore e ai truststore generati durante il lavoro sulla libreria, grazie ai quali è possibile impiegare sin da subito una comunicazione sicura e affidabile tra i vari nodi senza ulteriori operazioni da parte dell'utente.
+
+\subsubsection{\texttt{UDPNetworkManager}}

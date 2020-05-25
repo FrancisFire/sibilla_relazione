@@ -5,7 +5,7 @@ Più specificatamente, le simulazioni da eseguire sono sottomesse da parte di un
 All'interno della rete locale al master sono quindi presenti i \textbf{server slave} che rappresentano le unità di elaborazione delle simulazioni. Questi server non sono disponibili pubblicamente in rete e interagiscono con il master per poter ricevere nuove simulazioni da eseguire e per poter restituire i risultati di tali simulazioni.
 
 \subsection{Client}
-La logica di funzionamento di un client è contenuta interamente nella classe \texttt{ClientSimulationEnvironment}, le cui istanze devono essere incluse in tutte le classi di avvio di un client.
+La logica di funzionamento di un \textbf{client} è contenuta interamente nella classe \texttt{ClientSimulationEnvironment}, le cui istanze devono essere incluse in tutte le classi di avvio di un client.
 Nella definizione della classe di avvio di un client server è necessario includere l'istanziazione di un oggetto della classe \texttt{ModelDefinition}, rappresentante il modello della simulazione che verrà sottomesso per essere elaborato, e parametri relativi alla simulazione quali il numero delle repliche e la deadline [?].
 
 Alla sua creazione, l'istanza di \texttt{ClientSimulationEnvironment} cercherà di contattare tramite la rete un server master utilizzando i parametri definiti all'avvio, quali porta, indirizzo IP e tipo di comunicazione basata su TCP. 
@@ -20,4 +20,17 @@ Tutte le comunicazioni successive a questa fase riguardano la ricezione dei risu
 Sottosezione del master
 
 \subsection{Server Slave}
+La classe alla base del funzionamento di un \textbf{server slave} è \texttt{DiscoverableBasicSimulationServer}, estensione della classe \texttt{BasicSimulationServer}.
+La classe \texttt{BasicSimulationServer} è stata rivista per poter implementare il nuovo protocollo di comunicazione con i server master ma la logica è rimasta la medesima:
+le istanze di tale classe sono infatti forniti di due istanze di \texttt{ExecutorService} basati su \texttt{CachedThreadPool} per poter gestire, rispettivamente, le connessioni in ingresso da parte di server master
+e per gestire in maniera efficiente i task di simulazione sottomessi sfruttando le capacità di \textbf{multithreading} del server slave.
+Nella corrente implementazione di \texttt{BasicSimulationServer} è inoltre presente la gestione della comunicazione con i server master per poter ricevere da questi e caricare in memoria i byte dei file .class associati
+alle simulazioni da eseguire e, successivamente, anche i parametri e i dati di tali simulazioni, oltre che per poter inviare ai server master i risultati delle simulazioni richieste una volta che la loro esecuzione è terminata.
+Tra le funzionalità presenti nella classe si annoverano anche la possibilità di chiudere la connessione con i server master che lo richiedono, nel caso ideale dopo aver ricevuto i risultati delle simulazioni sottomesse,
+e di rispondere ai messaggi di ping che i server master potrebbero inviare in caso sia stato rilevato un timeout. 
 
+Il comportamento aggiuntivo introdotto tramite la classe \texttt{DiscoverableBasicSimulationServer} si focalizza sulla possibilità per uno slave server di essere individuato nella propria rete locale da tutti i server master
+presenti all'interno della medesima rete. Ogni slave server riceve infatti periodicamente \textbf{messaggi di discovery} inviati in modalità broadcast dai server master presenti. Rispondendo a tali messaggi, il singolo server slave
+permette di risultare visibile ai server master che, alla successiva interazione da parte di client, lo contatteranno per poter sottomettere nuove simulazioni.
+Nell'attuale implementazione i server slave rispondono ad ogni messaggio di broadcast inviato dai server master presenti nella loro rete. Non conoscendo a priori lo stato del server master e quali server slave sono già stati individuati
+tale implementazione permette agli slave di essere sempre visibili per poter ricevere nuove simulazioni da eseguire.
