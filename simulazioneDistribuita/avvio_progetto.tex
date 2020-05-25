@@ -1,20 +1,63 @@
 
 
 \section{Avvio del progetto}
-I tre componenti del progetto possono essere eseguiti singolarmente in due modalità: tramite l’utilizzo del wrapper di Gradle oppure tramite gli script per la bash. In particolare all’interno del package gradle quasylab.sibilla.examples.servers i tre componenti sono suddivisi all’interno di tre cartelle diverse, ognuna delle quali contenenti un file build.gradle e lo script in bash corrispondente.
+I tre componenti del progetto possono essere eseguiti singolarmente in due modalità: tramite l’utilizzo del wrapper di Gradle oppure tramite gli script per la bash. In particolare all’interno del package gradle \texttt{quasylab.sibilla.examples.servers} i tre componenti sono suddivisi all’interno di tre cartelle diverse, ognuna delle quali contenenti un file \texttt{build.gradle} e lo script in bash corrispondente.
 
-Il progetto può essere avviato con gradle clonando la repository del progetto da GitHub, ed eseguendo il comando gradle run all’interno della cartella corrispondente al componente che si desidera avviare. Nel caso si vogliano impostare dei parametri di avvio si deve aggiungere al comando di gradle il parametro --args=”[arguments]”, dove [arguments] rappresenta appunto i parametri da impostare.
+Il progetto può essere avviato con gradle clonando la repository del progetto da GitHub, ed eseguendo il comando gradle run all’interno della cartella corrispondente al componente che si desidera avviare. Nel caso si vogliano impostare dei parametri di avvio si deve aggiungere al comando di gradle il parametro \texttt{--args=”[arguments]”}, dove \texttt{[arguments]} rappresenta appunto i parametri da impostare.
 
-Il progetto può essere avviato anche tramite gli script per bash appositi, ottenibili nelle cartelle dei componenti del progetto. Per ottenere i file basterà scaricarli da github ed eseguirli, in questo caso la repository da github viene automaticamente scaricata sul computer. Dopo aver scaricato tali script basta eseguirli da una bash, ad esempio, nel caso avessimo scaricato lo script per il client e volessimo avviarlo, dovremo eseguire il comando ./client.sh. Per impostare dei parametri di avvio in questo caso dovremo aggiungere in seguito al comando “[arguments]”, dove [arguments] rappresenta appunto i parametri da impostare.
+Il progetto può essere avviato anche tramite gli script per bash appositi, ottenibili nelle cartelle dei componenti del progetto. Per ottenere i file basterà scaricarli da github ed eseguirli, in questo caso la repository da github viene automaticamente scaricata sul computer. Dopo aver scaricato tali script basta eseguirli da una bash, ad esempio, nel caso avessimo scaricato lo script per il client e volessimo avviarlo, dovremo eseguire il comando \texttt{./client.sh}. Per impostare dei parametri di avvio in questo caso dovremo aggiungere in seguito al comando \texttt{“[arguments]”}, dove \texttt{[arguments]} rappresenta appunto i parametri da impostare.
 
 \subsection{Parametri di avvio}
 
-Ogni componente del progetto permette di impostare dei parametri di avvio, questi sono spiegati più approfonditamente nei successivi paragrafi.
+Ogni componente del progetto permette di impostare dei parametri di avvio, questi sono spiegati più approfonditamente nei successivi paragrafi. In alternativa tali parametri sono visualizzabili anche eseguendo lo script in bash passando come parametro \texttt{-h}.
 
 \subsubsection{Client}
 
-Client
+\begin{table}[H]
+    \begin{tabularx}{\linewidth}{ l X }
+    -keyStoreType   & Il formato del keyStore per la connesstione SSL   \\
+    -keyStorePath   & Il path del keyStore per la connessione SSL       \\
+    -keyStorePass   & La password per accedere al keyStore              \\
+    -trustStoreType & Il formato del trustStore per la connesstione SSL \\
+    -trustStorePath & Il path del trustStore per la connessione SSL     \\
+    -trustStorePass & La password del trustStore per la connessione SSL \\
+    -masterAddress  & L'indirizzo del master server                     \\
+    -masterPort     & La porta su cui contattare il master server       \\
+    -masterCommunicationType & Il tipo di connessione utilizzata per comunicare col server master {[}DEFAULT/SECURE/FST{]}
+    \end{tabularx}
+\end{table}
+
 \subsubsection{Master}
-Master
+
+\begin{table}[H]
+    \begin{tabularx}{\linewidth}{ l X }
+    -keyStoreType         & Il formato del keyStore per la connesstione SSL              \\
+    -keyStorePath         & Il path del keyStore per la connessione SSL                  \\
+    -keyStorePass         & La password per accedere al keyStore                         \\
+    -trustStoreType       & Il formato del trustStore per la connesstione SSL            \\
+    -trustStorePath       & Il path del trustStore per la connessione SSL                \\
+    -trustStorePass       & La password del trustStore per la connessione SSL            \\
+    -masterDiscoveryPort  & La porta locale utilizzata per il discovery dei server slave \\
+    -slaveDiscoveryPort   & La porta remota utilizzata per il discovery dei server slave \\
+    -masterSimulationPort & La porta locale utilizzata per gestire le simulazioni        \\
+    -slaveDiscoveryCommunicationType   & Il tipo di connessione UDP utilizzata per il discovery dei server slave {[}DEFAULT{]}     \\
+    -clientSimulationCommunicationType & Il tipo di connessione TCP utilizzata per gestire le simulazioni coi server slave {[}DEFAULT/SECURE/FST{]}
+    \end{tabularx}
+\end{table}
+
 \subsubsection{Slave}
-Slave
+
+\begin{table}[H]
+    \begin{tabularx}{\linewidth}{ l X }
+    -keyStoreType        & Il formato del keyStore per la connesstione SSL       \\
+    -keyStorePath        & Il path del keyStore per la connessione SSL           \\
+    -keyStorePass        & La password per accedere al keyStore                  \\
+    -trustStoreType      & Il formato del trustStore per la connesstione SSL     \\
+    -trustStorePath      & Il path del trustStore per la connessione SSL         \\
+    -trustStorePass      & La password del trustStore per la connessione SSL     \\
+    -slaveDiscoveryPort                & La porta locale utilizzata per il discovery da parte del server master                                              \\
+    -slaveSimulationPort & La porta locale utilizzata per gestire le simulazioni \\
+    -masterDiscoveryCommunicationType  & Il tipo di connessione UDP utilizzata per il discovery da parte dei server master [DEFAULT]              \\
+    -masterSimulationCommunicationType & Il tipo di connessione TCP utilizzata per gestire le simulazioni col server master [DEFAULT/SECURE/FST]
+    \end{tabularx}
+\end{table}
