@@ -5,6 +5,42 @@ I tre componenti dell'infrastruttura comunicano tra di loro tramite l'invio di p
 
 \subsection{Comandi scambiati}
 
+\subsubsection{Client}
+
+\begin{table}[H]
+    \begin{tabularx}{\linewidth}{ l X }
+       \texttt{INIT}             & Indica l'inizio di una connessione con un master server, è seguito dall'invio del nome della classe \texttt{ModelDefinition} da simulare e dai corrispondenti class bytes \\
+       \texttt{DATA}             & Indica l'invio dei dati della simulazione da eseguire, è seguito dall'invio del \texttt{SimulationDataSet} da simulare \\
+       \texttt{PING}             & Invia una ping request ad un server \\
+       \texttt{CLOSE\_CONNECTION} & Indica la chiusura della connessione con l'host remoto
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Master}
+
+\begin{table}[H]
+    \begin{tabularx}{\linewidth}{ l X }
+        \texttt{INIT} & \\
+        \texttt{PING} & \\
+        \texttt{TASK} & \\
+        \texttt{RESULTS} & \\
+        \texttt{PONG} & \\
+        \texttt{INIT\_RESPONSE} & \\
+        \texttt{DATA\_RESPONSE} & \\
+        \texttt{CLOSE\_CONNECTION} & \\
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Slave}
+
+\begin{table}[H]
+    \begin{tabularx}{\linewidth}{ l X }
+        \texttt{PONG} & \\
+        \texttt{INIT\_RESPONSE} & \\
+        \texttt{CLOSE\_CONNECTION} & \\
+    \end{tabularx}
+\end{table}
+
 \subsection{Serializzazione e compressione}
 
 \subsection{Network Manager}
