@@ -11,25 +11,27 @@ I messaggi sono di due possibili tipi: \textbf{comandi} o \textbf{dati}. I coman
 \begin{table}[H]
     \begin{tabularx}{\linewidth}{ l X }
        \texttt{INIT}             & Indica l'inizio di una connessione con un master server, è seguito dall'invio del nome della classe \texttt{ModelDefinition} da simulare e dai corrispondenti class bytes \\
-       \texttt{DATA}             & Indica l'invio dei dati della simulazione da eseguire, è seguito dall'invio del \texttt{SimulationDataSet} da simulare \\
+       \texttt{DATA}             & Indica l'invio dei dati ad un master server della simulazione da eseguire, è seguito dall'invio del \texttt{SimulationDataSet} da simulare \\
        \texttt{PING}             & Invia una ping request ad un server \\
        \texttt{CLOSE\_CONNECTION} & Indica la chiusura della connessione con l'host remoto
     \end{tabularx}
+    \captionof{table}{Comandi disponibili per i client}
 \end{table}
 
 \subsubsection{Master}
 
 \begin{table}[H]
     \begin{tabularx}{\linewidth}{ l X }
-        \texttt{INIT} & Indica l'inizio di una connessione con un server slave, è seguito dall'invio del nome della classe \texttt{ModelDefinition} da simulare e dai corrispondenti class bytes \\
+        \texttt{INIT} & Indica l'inizio di una connessione con uno slave server, è seguito dall'invio del nome della classe \texttt{ModelDefinition} da simulare e dai corrispondenti class bytes \\
         \texttt{PING} & Invia una ping request ad un server \\
-        \texttt{TASK} & Indica l'invio di una simulazione ad un server slave, è seguita dall'invio del \texttt{NetworkTask} che verrà eseguito dal server slave \\
+        \texttt{TASK} & Indica l'invio di un task di simulazione ad uno slave server, è seguita dall'invio del \texttt{NetworkTask} che verrà eseguito dallo slave server \\
         \texttt{RESULTS} & Indica l'invio dei risultati di una simulazione eseguita al client, è seguita dall'invio dell'oggetto \texttt{SamplingFunction} che contiene i risultati di tale simulazione \\
         \texttt{PONG} & Risposta ad una ping request inviata da un altro host \\
         \texttt{INIT\_RESPONSE} & Indica il ricevimento del comando \texttt{INIT} da parte di un client \\
         \texttt{DATA\_RESPONSE} & Indica il ricevimento del comando \texttt{DATA} da parte di un client\\
         \texttt{CLOSE\_CONNECTION} & Indica il ricevimento del comando \texttt{CLOSE\_CONNECTION} da parte di un client e chiude a sua volta la connessione con l'host remoto \\
     \end{tabularx}
+    \captionof{table}{Comandi disponibili per i master server}
 \end{table}
 
 \subsubsection{Slave}
@@ -37,9 +39,10 @@ I messaggi sono di due possibili tipi: \textbf{comandi} o \textbf{dati}. I coman
 \begin{table}[H]
     \begin{tabularx}{\linewidth}{ l X }
         \texttt{PONG} & Risposta ad una ping request inviata da un altro host \\
-        \texttt{INIT\_RESPONSE} & Indica il ricevimento del comando \texttt{INIT} da parte di un server master \\
-        \texttt{CLOSE\_CONNECTION} & Indica il ricevimento del comando \texttt{CLOSE\_CONNECTION} da parte di un server master e chiude a sua volta la connessione con l'host remoto \\
+        \texttt{INIT\_RESPONSE} & Indica il ricevimento del comando \texttt{INIT} da parte di un master server \\
+        \texttt{CLOSE\_CONNECTION} & Indica il ricevimento del comando \texttt{CLOSE\_CONNECTION} da parte di un master server e chiude a sua volta la connessione con l'host remoto \\
     \end{tabularx}
+    \captionof{table}{Comandi disponibili per gli slave server}
 \end{table}
 
 \subsection{Trasporto delle informazioni}
@@ -81,10 +84,12 @@ Per semplificare e migliorare lo scambio di messaggi sono stati implementati dei
 
 \subsubsection{Serializzazione}
 
-Per rendere intuitivo l'invio dei messaggi è stato aggiunto un meccanismo di \textbf{serializzazione} per tradurre gli oggetti Java in \texttt{byte[]} che poi verranno inviate in rete tramite i le varie istanze di \texttt{NetworkManager}. In particolare sono stati utilizzati i metodi di \texttt{SerializationUtils}, contenuti all'interno della libreria \textbf{Apache Commons Lang 3}. L'unico requisito necessario affinchè un oggetto Java possa venire serializzato è che quest'ultimo implementi l'interfaccia \texttt{Serializable}.
+Per agevolare l'invio dei comandi e dei dati in rete è stato implementato un meccanismo di \textbf{serializzazione} per tradurre gli oggetti Java in \texttt{byte[]}, poi verranno inviati in rete tramite le istanze di \texttt{TCPNetworkManager} e \texttt{UDPNetworkManager}. 
+L'implementazione di tale tipo di serializzazione è stato effettuato tramite la classe \texttt{SerializationUtils}, presente nel package \texttt{quasylab.sibilla.core.network.serialization}, basandosi sulla libreria \texttt{org.apache.commons.lang3}.
+L'unico requisito necessario affinchè un oggetto Java possa venire serializzato è che quest'ultimo implementi l'interfaccia \texttt{Serializable}.
 
 \subsubsection{Compressione}
 
-Inoltre è stato utilizzato un meccanismo di \textbf{compressione}, contenuto all'interno del pacchetto \texttt{quasylab.sibilla.core.network.compression}. In particolare nella classe \texttt{Compressor} sono presenti due metodi statici, uno per comprimere e l'altro per decomprimere dei dati. Entrambi i metodi prendono in input un \texttt{byte[]} e restituiscono un \texttt{byte[]}, in modo da restituire dei dati pronti per essere inviati in rete per mezzo di un \texttt{NetworkManager}. Al fine di eseguire la \textbf{compressione} dei dati sono stati utilizzate le classi \texttt{GZIPOutputStream} e \texttt{GZIPInputStream}, contenute all'interno del \textbf{package} \texttt{java.io}.
+Inoltre è stato introdotto un meccanismo di \textbf{compressione}, contenuto all'interno del pacchetto \texttt{quasylab.sibilla.core.network.compression}. In particolare nella classe \texttt{Compressor} sono presenti due metodi statici, uno per comprimere e l'altro per decomprimere dei dati. Entrambi i metodi prendono in input un \texttt{byte[]} e restituiscono un \texttt{byte[]}, in modo da restituire dei dati pronti per essere inviati in rete per mezzo di istanze di \texttt{TCPNetworkManager} o di \texttt{UDPNetworkManager}. Al fine di eseguire la \textbf{compressione} dei dati sono stati utilizzate le classi \texttt{GZIPOutputStream} e \texttt{GZIPInputStream}, contenute all'interno del package \texttt{java.util.zip}.
 
-Questo meccanismo è utilizzato nell'invio e nella ricezione degli oggetti \texttt{ComputationResult} scambiati tra server slave e master, che contengono i risultati delle simulazioni eseguite dai server slave. In questo modo otteniamo una \textbf{diminuzione nel tempo di invio} dei risultati delle simulazioni ed una \textbf{diminuzione del traffico} sulla rete, in quanto vengono inviati meno dati in rete.
+Questo meccanismo è utilizzato nell'invio e nella ricezione degli oggetti \texttt{ComputationResult} scambiati tra slave server e master, che contengono i risultati delle simulazioni eseguite dagli slave server. In questo modo otteniamo una \textbf{diminuzione nel tempo di invio} dei risultati delle simulazioni ed una \textbf{diminuzione del traffico} sulla rete, in quanto vengono inviati meno dati in rete.

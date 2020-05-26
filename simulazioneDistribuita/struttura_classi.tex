@@ -5,7 +5,7 @@
 \subsection{\texttt{quasylab.sibilla.core.network}}
 Il package di riferimento relativo alla \textbf{libreria sviluppata}. Le classi contenute al suo interno hanno la natura di wrapper di dati e hanno un impiego condiviso da parte degli ulteriori pacchetti, ognuno presente con responsabilità e finalità definiti:
 
-\subsection{\texttt{quasylab.sibilla.core.network.client}} Contiene tutte le classi utili a inizializzare un nuovo \textbf{client} e a gestire la comunicazione con un server master.
+\subsection{\texttt{quasylab.sibilla.core.network.client}} Contiene tutte le classi utili a inizializzare un nuovo \textbf{client} e a gestire la comunicazione con un master server.
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{images/quasylab.sibilla.core.network.client.png}
@@ -13,7 +13,7 @@ Il package di riferimento relativo alla \textbf{libreria sviluppata}. Le classi 
     \caption{Diagramma delle classi del package \texttt{quasylab.sibilla.core.network.client}}
   \end{figure}
 
-\subsection{\texttt{quasylab.sibilla.core.network.master}} Contiene tutte le classi utili a inizializzare un nuovo \textbf{server master} e a gestire la comunicazione con tutti i client che sottomettono ad esso simulazione e con tutti i server slave che sono presenti all’interno della rete in cui tale master è avviato.
+\subsection{\texttt{quasylab.sibilla.core.network.master}} Contiene tutte le classi utili a inizializzare un nuovo \textbf{master server} e a gestire la comunicazione con tutti i client che sottomettono ad esso simulazione e con tutti gli slave server che sono presenti all’interno della rete in cui tale master è avviato.
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{images/quasylab.sibilla.core.network.master.png}
@@ -21,7 +21,7 @@ Il package di riferimento relativo alla \textbf{libreria sviluppata}. Le classi 
     \caption{Diagramma delle classi del package \texttt{quasylab.sibilla.core.network.master}}
   \end{figure}
 
-\subsection{\texttt{quasylab.sibilla.core.network.slave}} Contiene tutte le classi utili a inizializzare un nuovo \textbf{server slave} e a gestire la comunicazione con tutti i server master che inviano messaggi di discovery e sottomettono simulazioni.
+\subsection{\texttt{quasylab.sibilla.core.network.slave}} Contiene tutte le classi utili a inizializzare un nuovo \textbf{slave server} e a gestire la comunicazione con tutti i master server che inviano messaggi di discovery e sottomettono simulazioni.
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{images/quasylab.sibilla.core.network.slave.png}
@@ -37,7 +37,7 @@ Il package di riferimento relativo alla \textbf{libreria sviluppata}. Le classi 
     \caption{Diagramma delle classi del package \texttt{quasylab.sibilla.core.network.communication}}
   \end{figure}
 
-\subsection{\texttt{quasylab.sibilla.core.network.compression}} Contiene le classi di utilità che sono impiegate per la \textbf{compressione} e la \textbf{decompressione} dei messaggi e dei dati all’interno del protocollo di comunicazione. Il funzionamento delle classi all’interno del pacchetto si basa sulla librerie java.util.zip.
+\subsection{\texttt{quasylab.sibilla.core.network.compression}} Contiene le classi di utilità che sono impiegate per la \textbf{compressione} e la \textbf{decompressione} dei messaggi e dei dati all’interno del protocollo di comunicazione. Il funzionamento delle classi all’interno del pacchetto si basa sulla libreria \texttt{java.util.zip}.
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{images/quasylab.sibilla.core.network.compression.png}
@@ -45,7 +45,7 @@ Il package di riferimento relativo alla \textbf{libreria sviluppata}. Le classi 
     \caption{Diagramma delle classi del package \texttt{quasylab.sibilla.core.network.compression}}
   \end{figure}
 
-\subsection{\texttt{quasylab.sibilla.core.network.serialization}} Contiene le classi di utilità che sono impiegate per la \textbf{serializzazione} e \textbf{deserializzazione} dei messaggi e dei dati all’interno del protocollo di comunicazione e per il \textbf{caricamento} a tempo d’esecuzione delle classi contenenti i modelli delle simulazioni da elaborare e gestire. Il funzionamento delle classi relative alla serializzazione si basa sulla libreria org.apache.commons.lang3.
+\subsection{\texttt{quasylab.sibilla.core.network.serialization}} Contiene le classi di utilità che sono impiegate per la \textbf{serializzazione} e \textbf{deserializzazione} dei messaggi e dei dati all’interno del protocollo di comunicazione e per il \textbf{caricamento} a tempo d’esecuzione delle classi contenenti i modelli delle simulazioni da elaborare e gestire. Il funzionamento delle classi relative alla serializzazione si basa sulla libreria \texttt{org.apache.commons.lang3}.
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{images/quasylab.sibilla.core.network.serialization.png}
