@@ -42,8 +42,6 @@ I messaggi sono di due possibili tipi: \textbf{comandi} o \textbf{dati}. I coman
     \end{tabularx}
 \end{table}
 
-\subsection{Serializzazione e compressione}
-
 \subsection{Trasporto delle informazioni}
 Il trasporto dei messaggi da un nodo all'altro dell'infrastruttura è reso possibile tramite le classi che estendono le interfacce
 \texttt{TCPNetworkManager} e \texttt{UDPNetworkManager}, entrambi presenti nel package \texttt{quasylab.sibilla.core.network.communication} e rappresentanti canali di comunicazione basati sui protocolli
@@ -76,3 +74,17 @@ La gestione di tali store di chiavi è delegata alla classe di utilità \texttt{
 Negli esempi di avvio delle classi della libreria allegati a quest'ultima sono presenti anche i file .jks relativi ai keystore e ai truststore generati durante il lavoro sulla libreria, grazie ai quali è possibile impiegare sin da subito una comunicazione sicura e affidabile tra i vari nodi senza ulteriori operazioni da parte dell'utente.
 
 \subsubsection{\texttt{UDPNetworkManager}}
+
+\subsection{Ulteriori funzionalità}
+
+Per semplificare e migliorare lo scambio di messaggi sono stati implementati dei meccanismi per migliorare ulteriormente lo scambio dei messaggi, tra cui la serializzazione e la compressione.
+
+\subsubsection{Serializzazione}
+
+Per rendere intuitivo l'invio dei messaggi è stato aggiunto un meccanismo di \textbf{serializzazione} per tradurre gli oggetti Java in \texttt{byte[]} che poi verranno inviate in rete tramite i le varie istanze di \texttt{NetworkManager}. In particolare sono stati utilizzati i metodi di \texttt{SerializationUtils}, contenuti all'interno della libreria \textbf{Apache Commons Lang 3}. L'unico requisito necessario affinchè un oggetto Java possa venire serializzato è che quest'ultimo implementi l'interfaccia \texttt{Serializable}.
+
+\subsubsection{Compressione}
+
+Inoltre è stato utilizzato un meccanismo di \textbf{compressione}, contenuto all'interno del pacchetto \texttt{quasylab.sibilla.core.network.compression}. In particolare nella classe \texttt{Compressor} sono presenti due metodi statici, uno per comprimere e l'altro per decomprimere dei dati. Entrambi i metodi prendono in input un \texttt{byte[]} e restituiscono un \texttt{byte[]}, in modo da restituire dei dati pronti per essere inviati in rete per mezzo di un \texttt{NetworkManager}. Al fine di eseguire la \textbf{compressione} dei dati sono stati utilizzate le classi \texttt{GZIPOutputStream} e \texttt{GZIPInputStream}, contenute all'interno del \textbf{package} \texttt{java.io}.
+
+Questo meccanismo è utilizzato nell'invio e nella ricezione degli oggetti \texttt{ComputationResult} scambiati tra server slave e master, che contengono i risultati delle simulazioni eseguite dai server slave. In questo modo otteniamo una \textbf{diminuzione nel tempo di invio} dei risultati delle simulazioni ed una \textbf{diminuzione del traffico} sulla rete, in quanto vengono inviati meno dati in rete.
