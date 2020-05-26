@@ -21,14 +21,14 @@ I messaggi sono di due possibili tipi: \textbf{comandi} o \textbf{dati}. I coman
 
 \begin{table}[H]
     \begin{tabularx}{\linewidth}{ l X }
-        \texttt{INIT} & \\
-        \texttt{PING} & \\
-        \texttt{TASK} & \\
-        \texttt{RESULTS} & \\
-        \texttt{PONG} & \\
-        \texttt{INIT\_RESPONSE} & \\
-        \texttt{DATA\_RESPONSE} & \\
-        \texttt{CLOSE\_CONNECTION} & \\
+        \texttt{INIT} & Indica l'inizio di una connessione con un server slave, è seguito dall'invio del nome della classe \texttt{ModelDefinition} da simulare e dai corrispondenti class bytes \\
+        \texttt{PING} & Invia una ping request ad un server \\
+        \texttt{TASK} & Indica l'invio di una simulazione ad un server slave, è seguita dall'invio del \texttt{NetworkTask} che verrà eseguito dal server slave \\
+        \texttt{RESULTS} & Indica l'invio dei risultati di una simulazione eseguita al client, è seguita dall'invio dell'oggetto \texttt{SamplingFunction} che contiene i risultati di tale simulazione \\
+        \texttt{PONG} & Risposta ad una ping request inviata da un altro host \\
+        \texttt{INIT\_RESPONSE} & Indica il ricevimento del comando \texttt{INIT} da parte di un client \\
+        \texttt{DATA\_RESPONSE} & Indica il ricevimento del comando \texttt{DATA} da parte di un client\\
+        \texttt{CLOSE\_CONNECTION} & Indica il ricevimento del comando \texttt{CLOSE\_CONNECTION} da parte di un client e chiude a sua volta la connessione con l'host remoto \\
     \end{tabularx}
 \end{table}
 
@@ -36,9 +36,9 @@ I messaggi sono di due possibili tipi: \textbf{comandi} o \textbf{dati}. I coman
 
 \begin{table}[H]
     \begin{tabularx}{\linewidth}{ l X }
-        \texttt{PONG} & \\
-        \texttt{INIT\_RESPONSE} & \\
-        \texttt{CLOSE\_CONNECTION} & \\
+        \texttt{PONG} & Risposta ad una ping request inviata da un altro host \\
+        \texttt{INIT\_RESPONSE} & Indica il ricevimento del comando \texttt{INIT} da parte di un server master \\
+        \texttt{CLOSE\_CONNECTION} & Indica il ricevimento del comando \texttt{CLOSE\_CONNECTION} da parte di un server master e chiude a sua volta la connessione con l'host remoto \\
     \end{tabularx}
 \end{table}
 
