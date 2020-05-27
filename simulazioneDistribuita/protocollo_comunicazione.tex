@@ -76,7 +76,17 @@ Per poter ricreare totalmente una comunicazione sicura tramite TLS, per ognuno d
 La gestione di tali store di chiavi è delegata alla classe di utilità \texttt{SSLUtils}, con la quale è necessario interagire per poter impiegare \texttt{TCPSecureNetworkManager} nel caso la si scelga come classe per le comunicazioni tra i nodi.
 Negli esempi di avvio delle classi della libreria allegati a quest'ultima sono presenti anche i file .jks relativi ai keystore e ai truststore generati durante il lavoro sulla libreria, grazie ai quali è possibile impiegare sin da subito una comunicazione sicura e affidabile tra i vari nodi senza ulteriori operazioni da parte dell'utente.
 
+Le classi implementazione di \texttt{TCPNetworkManager} vengono impiegate nella libreria per tutte le comunicazioni tra i nodi dell'architettura che non siano relative al discovery di nuovi server slave.
+
 \subsubsection{\texttt{UDPNetworkManager}}
+I metodi di interfaccia si concentrano sull'invio e ricezione di informazioni sotto forma di \texttt{byte[]} e
+alla chiusura della connessione. 
+
+L'unica implementazione di tale interfaccia presente nella libreria sviluppata è \texttt{UDPDefaultNetworkManager} e si basa sull'uso di \texttt{DatagramSocket} per poter fornire una comunicazione basilare basata su \textbf{UDP}.
+Non sono presenti implementazioni che sfruttino TLS in quanto UDP è, per sua natura, un protocollo non orientato alla connessione e non può pertanto garantire sicurezza e affidabilità delle trasmissioni su rete allo stesso livello di un protocollo orientato alla connessione come TCP.
+
+Le classi implementazione di \texttt{UDPNetworkManager} vengono impiegate nella libreria per lo scambio delle comunicazioni di discovery tra server master e server slave.
+
 
 \subsection{Ulteriori funzionalità}
 
