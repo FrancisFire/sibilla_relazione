@@ -6,7 +6,7 @@ All'interno della rete locale al master sono quindi presenti i \textbf{server sl
 
 \subsection{Client}
 La logica di funzionamento di un \textbf{client} è contenuta interamente nella classe \texttt{ClientSimulationEnvironment}, le cui istanze devono essere incluse in tutte le classi di avvio di un client.
-Nella definizione della classe di avvio di un client server è necessario includere l'istanziazione di un oggetto della classe \texttt{ModelDefinition}, rappresentante il modello della simulazione che verrà sottomesso per essere elaborato, e parametri relativi alla simulazione quali il numero delle repliche e la deadline [?].
+Nella definizione della classe di avvio di un client server è necessario includere l'istanziazione di un oggetto della classe \texttt{ModelDefinition}, rappresentante il modello della simulazione che verrà sottomesso per essere elaborato, e parametri relativi alla simulazione quali il numero delle repliche e la deadline.
 
 Alla sua creazione, l'istanza di \texttt{clientSimulationEnvironment} cercherà di contattare tramite la rete un server master utilizzando i parametri definiti all'avvio, quali porta, indirizzo IP e tipo di comunicazione basata su TCP. 
 Durante questa fase vengono trasmessi al server master i byte contenuti nel file compilato .class relativo alla classe che implementa \texttt{ModelDefinition}, istanziata all'avvio del client.
