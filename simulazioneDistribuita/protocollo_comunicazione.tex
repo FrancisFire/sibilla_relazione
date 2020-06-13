@@ -50,7 +50,7 @@ Il trasporto dei messaggi da un nodo all'altro dell'infrastruttura è reso possi
 \texttt{TCPNetworkManager} e \texttt{UDPNetworkManager}, entrambi presenti nel package \texttt{quasylab.sibilla.core.network.communication} e rappresentanti canali di comunicazione basati sui protocolli
 del livello di trasporto \textbf{TCP} e \textbf{UDP}.
 Gli unici metodi implementati all'interno delle interfacce sono \textbf{factory methods} che restituiscono istanze di classi implementazioni a seconda del valore dei parametri passati come argomento.
-Nello specifico, uno dei metodi e richiede come argomento un'istanza di \texttt{NetworkInfo}, contenente
+Nello specifico, uno dei metodi richiede come argomento un'istanza di \texttt{NetworkInfo}, contenente
 i valori di porta e indirizzo logico del nodo che si vuole contattare assieme al valore di \texttt{NetworkManagerType} specifico del canale di comunicazione che si vuole impiegare, mentre l'altro metodo presente
 richiede, rispettivamente in \texttt{TCPNetworkManager} e \texttt{UDPNetworkManager}, un valore di \texttt{TCPNetworkManagerType} assieme ad un'istanza di \texttt{Socket} su cui basare la comunicazione ed un
 valore di \texttt{UDPNetworkManagerType} assieme ad un'istanza di \texttt{DatagramSocket}.

@@ -38,7 +38,7 @@ Tra le funzionalità presenti nella classe si annoverano anche la possibilità d
 e di rispondere ai messaggi di ping che i server master potrebbero inviare in caso sia stato rilevato un timeout. 
 
 Il comportamento aggiuntivo introdotto tramite la classe \texttt{DiscoverableBasicSimulationServer} si focalizza sulla possibilità per un server slave di essere individuato nella propria rete locale da tutti i server master
-presenti all'interno della medesima rete. Ogni server slave riceve infatti periodicamente \textbf{messaggi di discovery} inviati in modalità broadcast dai server master presenti. Rispondendo a tali messaggi, il singolo server slave
+presenti all'interno della medesima rete. Ogni server slave riceve infatti periodicamente \textbf{messaggi di discovery} inviati in modalità broadcast dai server master presenti, che contengono l'oggetto \texttt{NetworkInfo} con le informazioni riguardo l'\textbf{indirizzo IP}, la \textbf{porta} e l'\texttt{UPDNetworkManagerType} usati per il discovery da parte del server master. Lo slave risponde a tali messaggi inviando l'oggetto \texttt{NetworkInfo} contenente le informazioni di rete del server che eseguirà le simulazioni. In questo modo il singolo server slave
 permette di risultare visibile ai server master che, alla successiva interazione da parte di client, lo contatteranno per poter sottomettere nuove simulazioni.
 Nell'attuale implementazione, i server slave rispondono ad ogni messaggio di broadcast inviato dai server master presenti nella loro rete. Non conoscendo a priori lo stato del server master e quali server slave sono già stati individuati
 tale implementazione permette agli slave di essere sempre visibili per poter ricevere nuove simulazioni da eseguire.
