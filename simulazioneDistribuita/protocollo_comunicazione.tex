@@ -13,7 +13,7 @@ I messaggi sono di due possibili tipi: \textbf{comandi} o \textbf{dati}. I coman
        \texttt{INIT}             & Indica l'inizio di una connessione con un server master, è seguito dall'invio del nome della classe \texttt{ModelDefinition} da simulare e dai corrispondenti class bytes \\
        \texttt{DATA}             & Indica l'invio dei dati ad un server master della simulazione da eseguire, è seguito dall'invio del \texttt{SimulationDataSet} da simulare \\
        \texttt{PING}             & Invia una ping request ad un server \\
-       \texttt{CLOSE\_CONNECTION} & Indica la chiusura della connessione con l'host remoto
+       \texttt{CLOSE\_CONNECTION} & Indica la chiusura della connessione con l'host remoto, è seguto dall'invio del nome della classe \texttt{ModelDefinition} usata per le simulazioni che verrà eliminata dai server
     \end{tabularx}
     \captionof{table}{Comandi disponibili per i client}
 \end{table}
@@ -29,7 +29,7 @@ I messaggi sono di due possibili tipi: \textbf{comandi} o \textbf{dati}. I coman
         \texttt{PONG} & Risposta ad una ping request inviata da un altro host \\
         \texttt{INIT\_RESPONSE} & Indica il ricevimento del comando \texttt{INIT} da parte di un client \\
         \texttt{DATA\_RESPONSE} & Indica il ricevimento del comando \texttt{DATA} da parte di un client\\
-        \texttt{CLOSE\_CONNECTION} & Indica il ricevimento del comando \texttt{CLOSE\_CONNECTION} da parte di un client e chiude a sua volta la connessione con l'host remoto \\
+        \texttt{CLOSE\_CONNECTION} & Indica il ricevimento del comando \texttt{CLOSE\_CONNECTION} da parte di un client e chiude a sua volta la connessione con l'host remoto, inoltre è inviato ai server slave per indicare la chiusura della connessione, in questo caso è seguto dall'invio del nome della classe \texttt{ModelDefinition} usata per le simulazioni che verrà eliminata dai server
     \end{tabularx}
     \captionof{table}{Comandi disponibili per i server master}
 \end{table}
