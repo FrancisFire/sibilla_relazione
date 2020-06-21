@@ -1,5 +1,6 @@
 \section{Avvio degli esempi di applicazione}
-I tre esempi di avvio di un client, di un server master e di un server slave allegati alla libreria grazie al package \texttt{quasylab.sibilla.examples.servers} possono essere eseguiti singolarmente in due modalità: tramite l’utilizzo dei relativi \textbf{Gradle wrapper} oppure tramite gli \textbf{script} per la bash forniti. In particolare all’interno del package Gradle \texttt{quasylab.sibilla.examples.servers} i tre esempi sono disposti all’interno di tre cartelle diverse, ognuna delle quali contiene un file \texttt{build.gradle} e lo script in bash corrispondente.
+I requisiti di avvio della libreria, e conseguentemente anche degli esempi proposti, sono relativi alla presenza di \textbf{Gradle} e del \textbf{JDK Java} in versione \textbf{11 o superiore}.
+I tre esempi di avvio di un Client, di un server Master e di un server Slave allegati alla libreria grazie al package \texttt{quasylab.sibilla.examples.servers} possono essere eseguiti singolarmente in due modalità: tramite l’utilizzo dei relativi \textbf{Gradle wrapper} oppure tramite gli \textbf{script} per la bash forniti. In particolare all’interno del package Gradle \texttt{quasylab.sibilla.examples.servers} i tre esempi sono disposti all’interno di tre cartelle diverse, ognuna delle quali contiene un file \texttt{build.gradle} e lo script in bash corrispondente.
 
 Gli esempi di applicazione delle classi della libreria possono essere avviati tramite Gradle una volta clonata la repository del progetto da \href{https://github.com/quasylab/sibilla/tree/working}{GitHub} ed eseguendo il comando gradle run all’interno della cartella corrispondente al componente che si desidera avviare. Nel caso si vogliano impostare dei parametri di avvio si deve aggiungere al comando di gradle il parametro \texttt{--args="[arguments]"}, dove \texttt{[arguments]} rappresenta appunto i parametri da impostare.
 
@@ -11,9 +12,9 @@ Ogni componente del progetto permette di impostare dei parametri di avvio, visua
 
 \subsubsection{\texttt{quasylab.sibilla.examples.servers.client}}
 
-L'inizializzazione di un nuovo client è demandata alla classe \texttt{ClientApplication}, all'interno della quale viene inizializzata un'istanza di \texttt{ClientSimulationEnvironment} e vengono trattati i parametri di avvio specificati.
-Oltre alla specifica classe di avvio sono presenti anche le classi \texttt{SeirModel} e \texttt{SeirModelDefinition}, mirate a definire un modello di simulazione da poter sottomettere al server master che verrà contattato dal client.
-In aggiunta, nella cartella \textbf{resources} sono presenti i file \texttt{clientKeyStore.jks} e \texttt{clientTrustStore.jks}, relativi rispettivamente al keystore di chiavi private e al truststore delle chiavi pubbliche fidate associate al client che si intende avviare. Tali file sono caricati dinamicamente da Gradle e consentono di impostare correttamente una connessione sicura tramite TLS, quando richiesta dall'utente all'avvio, senza ulteriori configurazioni.
+L'inizializzazione di un nuovo Client è demandata alla classe \texttt{ClientApplication}, all'interno della quale viene inizializzata un'istanza di \texttt{ClientSimulationEnvironment} e vengono trattati i parametri di avvio specificati.
+Oltre alla specifica classe di avvio sono presenti anche le classi \texttt{SeirModel} e \texttt{SeirModelDefinition}, mirate a definire un modello di simulazione da poter sottomettere al server Master che verrà contattato dal Client.
+In aggiunta, nella cartella \textbf{resources} sono presenti i file \texttt{clientKeyStore.jks} e \texttt{clientTrustStore.jks}, relativi rispettivamente al keystore di chiavi private e al truststore delle chiavi pubbliche fidate associate al Client che si intende avviare. Tali file sono caricati dinamicamente da Gradle e consentono di impostare correttamente una connessione sicura tramite TLS, quando richiesta dall'utente all'avvio, senza ulteriori configurazioni.
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{images/quasylab.sibilla.examples.servers.client.png}
@@ -29,19 +30,19 @@ In aggiunta, nella cartella \textbf{resources} sono presenti i file \texttt{clie
         \texttt{-trustStoreType} & Il formato del trustStore per la connessione TLS \\
         \texttt{-trustStorePath} & Il path del trustStore per la connessione TLS     \\
         \texttt{-trustStorePass} & La password del trustStore per la connessione TLS \\
-        \texttt{-masterAddress}  & L'indirizzo del server master                     \\
-        \texttt{-masterPort}     & La porta su cui contattare il server master       \\
-        \texttt{-masterCommunicationType} & Il tipo di comunicazione utilizzata per comunicare con il server master {[}DEFAULT/SECURE{]}
+        \texttt{-masterAddress}  & L'indirizzo del server Master                     \\
+        \texttt{-masterPort}     & La porta su cui contattare il server Master       \\
+        \texttt{-masterCommunicationType} & Il tipo di comunicazione utilizzata per comunicare con il server Master {[}DEFAULT/SECURE{]}
     \end{tabularx}
-    \captionof{table}{Parametri di avvio nel client d'esempio}
+    \captionof{table}{Parametri di avvio nel Client d'esempio}
 \end{table}
 
 \subsubsection{\texttt{quasylab.sibilla.examples.servers.master}}
 
-L'inizializzazione di un nuovo server master è demandata alla classe \texttt{MasterApplication}, all'interno della quale viene inizializzata un'istanza di \texttt{MasterServerSimulationEnvironment} e vengono trattati i parametri di avvio specificati.
-Oltre alla specifica classe di avvio sono presenti anche le classi \texttt{WebConfig}, \texttt{MasterController} e \texttt{MonitoringServerComponent}, mirate alla creazione e alla gestione di un server web tramite il quale fornire dei dati di monitoraggio utile grazie a delle \textbf{Rest API}. L'unica chiamata API presente al momento risponde alla porta \textbf{8080} della macchina su cui è inizializzato il server master e all'indirizzo \texttt{/master/state}. Tale chiamata fornisce una rappresentazione in formato \texttt{JSON} dell'istanza della classe \texttt{MasterState} associata al server master in esecuzione.
+L'inizializzazione di un nuovo server Master è demandata alla classe \texttt{MasterApplication}, all'interno della quale viene inizializzata un'istanza di \texttt{MasterServerSimulationEnvironment} e vengono trattati i parametri di avvio specificati.
+Oltre alla specifica classe di avvio sono presenti anche le classi \texttt{WebConfig}, \texttt{MasterController} e \texttt{MonitoringServerComponent}, mirate alla creazione e alla gestione di un server web tramite il quale fornire dei dati di monitoraggio utile grazie a delle \textbf{Rest API}. L'unica chiamata API presente al momento risponde alla porta \textbf{8080} della macchina su cui è inizializzato il server Master e all'indirizzo \texttt{/master/state}. Tale chiamata fornisce una rappresentazione in formato \texttt{JSON} dell'istanza della classe \texttt{MasterState} associata al server Master in esecuzione.
 La piccola implementazione del sistema di monitoraggio tramite chiamate web alle API grazie al framework \textbf{Spring} e alle relative librerie \texttt{org.springframework}.
-In aggiunta, nella cartella \textbf{resources} sono presenti i file \texttt{masterKeyStore.jks} e \texttt{masterTrustStore.jks}, relativi rispettivamente al keystore di chiavi private e al truststore delle chiavi pubbliche fidate associate al server master che si intende avviare. Tali file sono caricati dinamicamente da Gradle e consentono di impostare correttamente una connessione sicura tramite TLS, quando richiesta dall'utente all'avvio, senza ulteriori configurazioni.
+In aggiunta, nella cartella \textbf{resources} sono presenti i file \texttt{masterKeyStore.jks} e \texttt{masterTrustStore.jks}, relativi rispettivamente al keystore di chiavi private e al truststore delle chiavi pubbliche fidate associate al server Master che si intende avviare. Tali file sono caricati dinamicamente da Gradle e consentono di impostare correttamente una connessione sicura tramite TLS, quando richiesta dall'utente all'avvio, senza ulteriori configurazioni.
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{images/quasylab.sibilla.examples.servers.master.png}
@@ -57,19 +58,19 @@ In aggiunta, nella cartella \textbf{resources} sono presenti i file \texttt{mast
         \texttt{-trustStoreType}       & Il formato del trustStore per la connessione TLS            \\
         \texttt{-trustStorePath}       & Il path del trustStore per la connessione TLS                \\
         \texttt{-trustStorePass}       & La password del trustStore per la connessione TLS            \\
-        \texttt{-masterDiscoveryPort}  & La porta locale utilizzata per il discovery dei server slave \\
-        \texttt{-slaveDiscoveryPort}   & La porta remota utilizzata per il discovery dei server slave \\
+        \texttt{-masterDiscoveryPort}  & La porta locale utilizzata per il discovery dei server Slave \\
+        \texttt{-slaveDiscoveryPort}   & La porta remota utilizzata per il discovery dei server Slave \\
         \texttt{-masterSimulationPort} & La porta locale utilizzata per gestire le simulazioni        \\
-        \texttt{-slaveDiscoveryCommunicationType}   & Il tipo di comunicazione UDP utilizzata per il discovery dei server slave {[}DEFAULT{]}     \\
-        \texttt{-clientSimulationCommunicationType} & Il tipo di comunicazione TCP utilizzata per gestire le simulazioni tramite i server slave {[}DEFAULT/SECURE{]}
+        \texttt{-slaveDiscoveryCommunicationType}   & Il tipo di comunicazione UDP utilizzata per il discovery dei server Slave {[}DEFAULT{]}     \\
+        \texttt{-clientSimulationCommunicationType} & Il tipo di comunicazione TCP utilizzata per gestire le simulazioni tramite i server Slave {[}DEFAULT/SECURE{]}
     \end{tabularx}
-    \captionof{table}{Parametri di avvio nel server master d'esempio}
+    \captionof{table}{Parametri di avvio nel server Master d'esempio}
 \end{table}
 
 \subsubsection{\texttt{quasylab.sibilla.examples.servers.slave}}
 
-L'inizializzazione di un nuovo server slave è demandata alla classe \texttt{SlaveApplication}, all'interno della quale viene inizializzata un'istanza di \texttt{DiscoverableBasicSimulationServer} e vengono trattati i parametri di avvio specificati.
-In aggiunta, nella cartella \textbf{resources} sono presenti i file \texttt{slaveKeyStore.jks} e \texttt{slaveTrustStore.jks}, relativi rispettivamente al keystore di chiavi private e al truststore delle chiavi pubbliche fidate associate allo server slave che si intende avviare. Tali file sono caricati dinamicamente da Gradle e consentono di impostare correttamente una connessione sicura tramite TLS, quando richiesta dall'utente all'avvio, senza ulteriori configurazioni.
+L'inizializzazione di un nuovo server Slave è demandata alla classe \texttt{SlaveApplication}, all'interno della quale viene inizializzata un'istanza di \texttt{DiscoverableBasicSimulationServer} e vengono trattati i parametri di avvio specificati.
+In aggiunta, nella cartella \textbf{resources} sono presenti i file \texttt{slaveKeyStore.jks} e \texttt{slaveTrustStore.jks}, relativi rispettivamente al keystore di chiavi private e al truststore delle chiavi pubbliche fidate associate allo server Slave che si intende avviare. Tali file sono caricati dinamicamente da Gradle e consentono di impostare correttamente una connessione sicura tramite TLS, quando richiesta dall'utente all'avvio, senza ulteriori configurazioni.
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{images/quasylab.sibilla.examples.servers.slave.png}
@@ -85,10 +86,10 @@ In aggiunta, nella cartella \textbf{resources} sono presenti i file \texttt{slav
         \texttt{-trustStoreType}      & Il formato del trustStore per la connessione TLS     \\
         \texttt{-trustStorePath}      & Il path del trustStore per la connessione TLS         \\
         \texttt{-trustStorePass}      & La password del trustStore per la connessione TLS     \\
-        \texttt{-slaveDiscoveryPort}                & La porta locale utilizzata per il discovery da parte del server master                                              \\
+        \texttt{-slaveDiscoveryPort}                & La porta locale utilizzata per il discovery da parte del server Master                                              \\
         \texttt{-slaveSimulationPort} & La porta locale utilizzata per gestire le simulazioni \\
-        \texttt{-masterDiscoveryCommunicationType}  & Il tipo di comunicazione UDP utilizzata per il discovery da parte dei server master {[}DEFAULT{]}               \\
-        \texttt{-masterSimulationCommunicationType} & Il tipo di comunicazione TCP utilizzata per gestire le simulazioni col server master {[}DEFAULT/SECURE{]}
+        \texttt{-masterDiscoveryCommunicationType}  & Il tipo di comunicazione UDP utilizzata per il discovery da parte dei server Master {[}DEFAULT{]}               \\
+        \texttt{-masterSimulationCommunicationType} & Il tipo di comunicazione TCP utilizzata per gestire le simulazioni col server Master {[}DEFAULT/SECURE{]}
     \end{tabularx}
-    \captionof{table}{Parametri di avvio nel server slave d'esempio}
+    \captionof{table}{Parametri di avvio nel server Slave d'esempio}
 \end{table}
