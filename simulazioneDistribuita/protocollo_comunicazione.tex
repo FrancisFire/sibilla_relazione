@@ -95,7 +95,7 @@ Per semplificare lo scambio di messaggi sono stati implementati dei meccanismi p
 \subsubsection{Serializzazione}
 
 Per agevolare l'invio dei comandi e dei dati in rete è stato implementato un meccanismo di \textbf{serializzazione} per tradurre gli oggetti Java in \texttt{byte[]}, poi verranno inviati in rete tramite le istanze di \texttt{TCPNetworkManager} e \texttt{UDPNetworkManager}. 
-L'implementazione di tale tipo di serializzazione è stato effettuato tramite la classe \texttt{SerializationUtils}, presente nel package \texttt{quasylab.sibilla.core.network.serialization}, basandosi sulla classe \texttt{org.apache.commons.lang3.SerializationUtils}.
+L'implementazione di tale tipo di serializzazione è stato effettuato tramite la classe \texttt{Serializer}, presente nel package \texttt{quasylab.sibilla.core.network.serialization}, basandosi sulla classe \texttt{org.apache.commons.lang3.SerializationUtils}.
 L'unico requisito necessario affinchè un oggetto Java possa venire serializzato è che quest'ultimo implementi l'interfaccia \texttt{Serializable}.
 
 \subsubsection{Compressione}
