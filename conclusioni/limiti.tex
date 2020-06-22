@@ -1,7 +1,7 @@
 \section{Problemi e limiti della libreria}
 
 Abbiamo notato come all'interno dell'infrastruttura il processo di serializzazione dei risultati di una simulazione eseguita da un server Slave sia un fattore problematico, in quanto può impiegare una grande quantità di tempo. 
-In particolare va notato che la serializzazione di un risultato non dipende dalla complessità di un modello o dal tempo di computazione, ma dalla sui grandezza in termini di memoria. 
+In particolare va notato che la serializzazione di un risultato non dipende dalla complessità di un modello o dal tempo di computazione, ma dalla sua grandezza in termini di memoria. 
 Questo significa che durante la simulazione di modelli semplici la performance dell'infrastruttura nel complesso risulta essere molto minore rispetto ad una simulazione su vari thread di un unico dispositivo, dove appunto non è richiesta serializzazione. 
 Tale divario viene sempre più ammortizzato all'aumentare del tempo di computazione di un risultato per un modello, in questo caso il tempo di serializzazione, che non dipende dalla complessità del modello, potrebbe diventare trascurabile.
 
