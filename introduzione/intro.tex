@@ -1,3 +1,39 @@
 
-Il lavoro del progetto si è concentrato nello sviluppo e raffinamento delle classi orientate a rendere la simulazione del framework \textbf{Sibilla} distribuita in rete.
-Da questo lavoro è nata la libreria \texttt{quasylab.sibilla.core.network}, ideata per affiancare e sfruttare le classi già presenti nella libreria originale \texttt{quasylab.sibilla.core.simulator}.
+Con \emph{simulazione} si fa riferimento ad un processo di analisi che consente di prevedere le possibili evoluzioni di un \emph{sistema reale} a partire da una sua opportuna descrizione. 
+%
+Gli ambiti di applicazione della simulazione sono molteplici e vanno dall'ingegneria civile alla biologia, dalle scienze sociali all'epidemiologia.
+
+Il primo passo della simulazione \`e la definizione del \emph{modello} che descrive il \emph{sistema} che si vuole simulare.
+%
+Esistono diversi formalismi, che variano a secondo del particolare contesto applicativo, per descrivere il modello da simulare.
+%
+Ogni formalismo metter\`a in risalto gli aspetti specifici che si vogliono studiare in un sistema. 
+
+Dato un \emph{modello} il processo di simulazione consente di ricostruire l'evoluzione dello stesso nel tempo. 
+%
+Supponendo che ad un certo tempo $t$ il nostro sistema descritto per mezzo di un modello $M$ si trovi nello stato $s$, il singolo passo di simulazione viene realizzato individuando il prossimo stato $s'$ e a quale  istante di tempo $t'>t$ tale stato verr\`a raggiunto. 
+%
+L'evoluzione del sistema, infatti, viene rappresentato per mezzo di \emph{passi discreti}.
+%
+La computazione del singolo passo di comunicazione necessita l'uso di un \emph{generatore pseudocasuale di numeri} necessario a \emph{risolvere} le possibili incertezze presenti nel sistema.
+
+Il risultato di un singolo \emph{run} di simulazione permette di ottenere a partire da un modello $M$ e da uno \emph{stato iniziale} $s$ una sequenza, detta anche \emph{traiettoria}, che descrive l'evoluzione del sistema nel tempo\footnote{Per semplicit\`a si assume che la simulazione parta dal tempo $0$.}:
+
+\[
+(s,0)(s_1,t_1)\cdots (s_i,t_i)\cdots (s_n,t_n)
+\]  
+
+\noindent
+dove $(s_i,t_i)$ rappresenta lo stato del sistema a tempo $t_i$.
+
+Per poter effettuare l'analisi di un sistema un numero $N$ di traiettorie vengono generate ed analizzate per mezzo di metodi statistici. Quest'ultimi vengono utilizzati per poter stimare parametri quali \emph{media} e \emph{varianza} delle misure di interesse o per valutare la \emph{probabilit\`a} con cui certe configurazioni (potenzialmente pericolose) possono essere raggiunte.
+%
+Maggiore \`e il numero $N$ di traiettorie generate, maggiore sar\`a la \emph{precisione} dei risultati stimati. 
+%
+Questo significa che, per poter garantire analisi ragionevoli, \`e spesso necessario generare un numero elevato di traiettorie.
+%
+Tale generazione, soprattuto nel caso di sistemi di dimensioni elevate, risulta particolarmente oneroso per quanto riguarda il tempo di computazione.
+%
+Fortunatamente, per\`o, il processo di generazione \`e completamente \emph{parallelizzabile}.
+
+Lo scopo di questo laboro \`e stato quello di sviluppare un ambiente distribuito per il supporto alla simulazione di sistemi. L'ambiente di simulazione \`e stato integrato nel framework Sibilla\footnote{\url{https://github.com/quasylab/sibilla}}, un ambiente di simulazione sviluppato presso l'Universit\`a di Camerino.
